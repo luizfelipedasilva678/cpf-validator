@@ -1,9 +1,13 @@
 (function() {
+    function cpfFormatter(array,pos,signal) {
+        return array.splice(pos,0,signal);
+    }
+
     function replacer(match){
         let vet = match.split("");
-        vet.splice(3,0,".");
-        vet.splice(7,0,".");
-        vet.splice(11,0,"-");
+        cpfFormatter(vet,3,".");
+        cpfFormatter(vet,7,".");
+        cpfFormatter(vet,11,"-");
         return vet.join("");
     }
 
@@ -12,7 +16,6 @@
 
         if(target.id === 'cpf') {
             if(target.value.length === 11) {
-                target.disabled = true;
                 target.value = target.value.replace(/[0-9]{11}/g, replacer);
             }
         }
