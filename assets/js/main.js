@@ -1,6 +1,33 @@
+import {cpfValidator} from './class/CpfValidator.js'
+
 (function() {
+    let cpf;
+    let validate;
+
     function cpfFormatter(array,pos,signal) {
         return array.splice(pos,0,signal);
+    }
+
+    function separateNumbers(cpf) {
+        let cpfWithoutDots = cpf.split("");
+        
+        cpfWithoutDots.forEach(function(value, index){
+            if(value === '-' || value === '.') {
+                cpfWithoutDots.splice(index,1)
+            }
+        })
+
+        return transformsNumbers(cpfWithoutDots);;
+    }
+
+    function transformsNumbers(array) {
+        let newArray = [];
+        array.forEach(function(value){
+            newArray.push(Number(value));
+        })
+
+        console.log(newArray);
+        return newArray;
     }
 
     function replacer(match){
@@ -19,5 +46,14 @@
                 target.value = target.value.replace(/[0-9]{11}/g, replacer);
             }
         }
+    })
+
+    document.addEventListener('submit', function(e){
+        e.preventDefault();
+        
+        cpf = document.querySelector("#cpf").value;
+        cpfNumbers = separateNumbers(cpf);
+        validate = new cpfValidator(cpfNumbers)
+
     })
 })();
