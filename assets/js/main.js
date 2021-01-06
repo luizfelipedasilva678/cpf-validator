@@ -1,8 +1,7 @@
-import {cpfValidator} from './class/CpfValidator.js'
+import cpfValidator from './class/CpfValidator.js'
 
 (function() {
-    let cpf;
-    let validate;
+    let cpf, validate, cpfNumbers, resultFunctionOne, resultFunctionTwo;
 
     function cpfFormatter(array,pos,signal) {
         return array.splice(pos,0,signal);
@@ -26,7 +25,6 @@ import {cpfValidator} from './class/CpfValidator.js'
             newArray.push(Number(value));
         })
 
-        console.log(newArray);
         return newArray;
     }
 
@@ -53,7 +51,17 @@ import {cpfValidator} from './class/CpfValidator.js'
         
         cpf = document.querySelector("#cpf").value;
         cpfNumbers = separateNumbers(cpf);
-        validate = new cpfValidator(cpfNumbers)
+        validate = new cpfValidator(cpfNumbers);
+        resultFunctionOne = validate.validateFirstNumber();
+        resultFunctionTwo = validate.validateSecondNumber();
 
+        if (resultFunctionOne && resultFunctionTwo) {
+            document.querySelector('.valid').classList.remove('hide');
+            document.querySelector('.invalid').classList.add('hide');
+        } else {
+            document.querySelector('.valid').classList.add('hide');
+            document.querySelector('.invalid').classList.remove('hide');
+        }
+        
     })
 })();
