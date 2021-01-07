@@ -14,8 +14,8 @@ cpfValidator.prototype.validateFirstNumber = function() {
         }
     })
 
-    firstNumberIsCorrect = result*10 % 11 === arrayCpf[9];
-    return firstNumberIsCorrect;
+    firstNumberIsCorrect = (result * 10 % 11) > 9 ? 0 : (result * 10 % 11);
+    return firstNumberIsCorrect === arrayCpf[9];
 }
 cpfValidator.prototype.validateSecondNumber = function() {
     let arrayCpf = this.cpf;
@@ -30,6 +30,6 @@ cpfValidator.prototype.validateSecondNumber = function() {
         }
     })
 
-    secondNumberIsCorrect = result*10%11 === arrayCpf[10];
-    return secondNumberIsCorrect;
+    secondNumberIsCorrect = (result* 10 % 11) > 9 ? 0 : (result* 10 % 11);
+    return secondNumberIsCorrect === arrayCpf[10];
 }
