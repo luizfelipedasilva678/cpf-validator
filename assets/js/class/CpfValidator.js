@@ -2,6 +2,8 @@ export default function cpfValidator(cpf) {
     this.cpf = cpf;
 }
 cpfValidator.prototype.validateFirstNumber = function() {
+    if(this.cpf.join('') === String(this.cpf[0]).repeat(this.cpf.length)) return false;
+
     let arrayCpf = this.cpf;
     let count = 10;
     let result = 0;
@@ -18,6 +20,8 @@ cpfValidator.prototype.validateFirstNumber = function() {
     return firstNumberIsCorrect === arrayCpf[9];
 }
 cpfValidator.prototype.validateSecondNumber = function() {
+    if(this.cpf.join("") === String(this.cpf[0]).repeat(this.cpf.length)) return false;
+
     let arrayCpf = this.cpf;
     let count = 11;
     let result = 0;
